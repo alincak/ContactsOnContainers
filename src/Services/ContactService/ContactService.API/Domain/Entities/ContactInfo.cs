@@ -2,6 +2,15 @@
 {
   public class ContactInfo
   {
+    public ContactInfo() { }
+
+    public ContactInfo(string contactId, ContactInfoType infoType, string value)
+    {
+      ContactId = contactId;
+      InfoType = infoType;
+      Value = value;
+    }
+
     public string Id { get; set; }
     public string ContactId { get; set; }
     public ContactInfoType InfoType { get; set; }

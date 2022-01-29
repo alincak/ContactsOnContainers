@@ -1,5 +1,6 @@
 ﻿using ContactService.API.Configurations.Settings;
 using ContactService.API.Domain.Entities;
+using ContactsOnContainers.Shared.Helpers;
 using MongoDB.Driver;
 
 namespace ContactService.API.Infrastructure.Repository
@@ -18,39 +19,54 @@ namespace ContactService.API.Infrastructure.Repository
       _contactInfoCollection = db.GetCollection<ContactInfo>(databaseSettings.ContactInfoCollectionName);
     }
 
-    public Task<ContactInfo> AddContactInfoAsync(ContactInfo.ContactInfoType infoType, string value)
+    public async Task<ContactInfo> AddContactInfoAsync(string contactId, ContactInfo.ContactInfoType infoType, string value)
     {
-      throw new NotImplementedException();
+      var contact = await GetContactByIdAsync(contactId);
+      if (contact == null)
+      {
+        return await TaskEmpty<ContactInfo>.Task;
+      }
+
+      var contactInfo = new ContactInfo(contactId, infoType, value);
+      await _contactInfoCollection.InsertOneAsync(contactInfo);
+
+      return contactInfo;
     }
 
-    public Task<Contact> CreateAsync(Contact contact)
+    public async Task<Contact> CreateAsync(Contact contact)
     {
-      throw new NotImplementedException();
+      await _contactCollection.InsertOneAsync(contact);
+
+      return contact;
     }
 
-    public Task<bool> DeleteAsync(string id)
+    public async Task<bool> DeleteAsync(string id)
     {
-      throw new NotImplementedException();
+      var result = await _contactCollection.DeleteOneAsync(x => x.Id == id);
+
+      return result.DeletedCount > 0;
     }
 
-    public Task<bool> DeleteContactInfoAsync(string id)
+    public async Task<bool> DeleteContactInfoAsync(string id)
     {
-      throw new NotImplementedException();
+      var result = await _contactInfoCollection.DeleteOneAsync(x => x.Id == id);
+
+      return result.DeletedCount > 0;
     }
 
-    public Task<IList<Contact>> GetAllAsync()
+    public async Task<IList<Contact>> GetAllAsync()
     {
-      throw new NotImplementedException();
+      return await _contactCollection.Find(c => true).ToListAsync();
     }
 
-    public Task<Contact> GetContactAsync(string id)
+    public async Task<Contact> GetContactByIdAsync(string id)
     {
-      throw new NotImplementedException();
+      return await _contactCollection.Find(x => x.Id == id).FirstAsync();
     }
 
-    public Task<IList<ContactInfo>> GetContactInfosAsync(string contactId)
+    public async Task<IList<ContactInfo>> GetContactInfosByContactIdAsync(string contactId)
     {
-      throw new NotImplementedException();
+      return await _contactInfoCollection.Find(x => x.ContactId == contactId).ToListAsync();
     }
   }
 }
