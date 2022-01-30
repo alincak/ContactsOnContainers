@@ -2,7 +2,6 @@
 using ContactService.API.Domain.Entities;
 using ContactService.API.Infrastructure.Repository;
 using ContactService.API.Models;
-using ContactsOnContainers.Shared.Extensions;
 using ContactsOnContainers.Shared.Models.ResponseModels;
 using Microsoft.AspNetCore.Mvc;
 using System.Net;
@@ -60,7 +59,7 @@ namespace ContactService.API.Controllers
       var contact = await _repository.GetContactByIdAsync(id);
       if (contact == null)
       {
-        return CustomResponse<string>.Fail("Bulunamadı.", (int)HttpStatusCode.NotFound);
+        return NotFound();
       }
 
       var model = _mapper.Map<ContactVo>(contact);
@@ -74,7 +73,6 @@ namespace ContactService.API.Controllers
       return CustomResponse<ContactVo>.Success(model, (int)HttpStatusCode.OK);
     }
 
-    [Route("create")]
     [HttpPost]
     [ProducesResponseType(typeof(ResultId<string>), (int)HttpStatusCode.Created)]
     [ProducesResponseType((int)HttpStatusCode.BadRequest)]
