@@ -1,4 +1,5 @@
 using ContactService.API.Configurations.Settings;
+using ContactService.API.Configurations.Startup;
 using ContactService.API.Infrastructure.Repository;
 using Microsoft.Extensions.Options;
 
@@ -21,7 +22,12 @@ builder.Services.AddScoped<IContactRepository, ContactRepository>();
 
 builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
+var rabbitMQConfig = new RabbitMQConfig();
+rabbitMQConfig.ConfigureService(builder.Services);
+
 var app = builder.Build();
+
+rabbitMQConfig.ConfigureEventBusForSubscription(app);
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())

@@ -28,7 +28,7 @@ namespace ContactService.API.Controllers
       var list = await _repository.GetAllContactInfosAsync();
 
       IList<ContactInfoVo> infos = null;
-      if (true)
+      if (list != null && list.Any())
       {
         infos = _mapper.Map<IList<ContactInfoVo>>(list);
       }

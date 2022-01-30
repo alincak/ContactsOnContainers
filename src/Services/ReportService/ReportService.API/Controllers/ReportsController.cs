@@ -27,7 +27,7 @@ namespace ReportService.API.Controllers
       var list = await _repository.GetAllReportsAsync();
 
       IList<ReportVo> reports = null;
-      if (true)
+      if (list != null && list.Any())
       {
         reports = _mapper.Map<IList<ReportVo>>(list);
       }
