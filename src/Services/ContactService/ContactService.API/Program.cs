@@ -1,4 +1,5 @@
 using ContactService.API.Configurations.Settings;
+using ContactService.API.Infrastructure.Repository;
 using Microsoft.Extensions.Options;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -15,6 +16,10 @@ builder.Services.AddSingleton<IDatabaseSettings>(sp =>
 {
   return sp.GetRequiredService<IOptions<DatabaseSettings>>().Value;
 });
+
+builder.Services.AddScoped<IContactRepository, ContactRepository>();
+
+builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
 var app = builder.Build();
 

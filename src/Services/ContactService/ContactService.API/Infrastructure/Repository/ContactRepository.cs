@@ -1,6 +1,5 @@
 ﻿using ContactService.API.Configurations.Settings;
 using ContactService.API.Domain.Entities;
-using ContactsOnContainers.Shared.Helpers;
 using MongoDB.Driver;
 
 namespace ContactService.API.Infrastructure.Repository
@@ -19,37 +18,22 @@ namespace ContactService.API.Infrastructure.Repository
       _contactInfoCollection = db.GetCollection<ContactInfo>(databaseSettings.ContactInfoCollectionName);
     }
 
-    public async Task<ContactInfo> AddContactInfoAsync(string contactId, ContactInfo.ContactInfoType infoType, string value)
+    public async Task UpdateContactInfosAsync(string contactId, IList<ContactInfo> contactInfos)
     {
-      var contact = await GetContactByIdAsync(contactId);
-      if (contact == null)
-      {
-        return await TaskEmpty<ContactInfo>.Task;
-      }
-
-      var contactInfo = new ContactInfo(contactId, infoType, value);
-      await _contactInfoCollection.InsertOneAsync(contactInfo);
-
-      return contactInfo;
+      _contactInfoCollection.DeleteMany(x => x.ContactId == contactId);
+      await _contactInfoCollection.InsertManyAsync(contactInfos);
     }
 
-    public async Task<Contact> CreateAsync(Contact contact)
+    public async Task<Contact> CreateContactAsync(Contact contact)
     {
       await _contactCollection.InsertOneAsync(contact);
 
       return contact;
     }
 
-    public async Task<bool> DeleteAsync(string id)
+    public async Task<bool> DeleteContactAsync(string id)
     {
       var result = await _contactCollection.DeleteOneAsync(x => x.Id == id);
-
-      return result.DeletedCount > 0;
-    }
-
-    public async Task<bool> DeleteContactInfoAsync(string id)
-    {
-      var result = await _contactInfoCollection.DeleteOneAsync(x => x.Id == id);
 
       return result.DeletedCount > 0;
     }
@@ -67,6 +51,11 @@ namespace ContactService.API.Infrastructure.Repository
     public async Task<IList<ContactInfo>> GetContactInfosByContactIdAsync(string contactId)
     {
       return await _contactInfoCollection.Find(x => x.ContactId == contactId).ToListAsync();
+    }
+
+    public async Task<IList<ContactInfo>> GetAllContactInfosAsync()
+    {
+      return await _contactInfoCollection.Find(c => true).ToListAsync();
     }
   }
 }

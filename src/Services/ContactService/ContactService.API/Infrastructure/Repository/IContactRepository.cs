@@ -4,11 +4,11 @@ namespace ContactService.API.Infrastructure.Repository
 {
   public interface IContactRepository
   {
-    Task<Contact> CreateAsync(Contact contact);
-    Task<bool> DeleteAsync(string id);
-    Task<ContactInfo> AddContactInfoAsync(string contactId, ContactInfo.ContactInfoType infoType, string value);
-    Task<bool> DeleteContactInfoAsync(string id);
+    Task<Contact> CreateContactAsync(Contact contact);
+    Task<bool> DeleteContactAsync(string id);
+    Task UpdateContactInfosAsync(string contactId, IList<ContactInfo> contactInfos);
     Task<IList<Contact>> GetAllAsync();
+    Task<IList<ContactInfo>> GetAllContactInfosAsync();
     Task<Contact> GetContactByIdAsync(string id);
     Task<IList<ContactInfo>> GetContactInfosByContactIdAsync(string contactId);
   }
