@@ -5,6 +5,14 @@ namespace ReportService.API.Domain.Entities
 {
   public class Report
   {
+    public Report() { }
+
+    public Report(DateTime createdDate, ReportStatus status)
+    {
+      CreatedDate = createdDate;
+      Status = status;
+    }
+
     [BsonId]
     [BsonRepresentation(BsonType.ObjectId)]
     public string Id { get; set; }
@@ -13,8 +21,6 @@ namespace ReportService.API.Domain.Entities
     [BsonRepresentation(BsonType.DateTime)]
     public DateTime? CompletedDate { get; set; }
     public ReportStatus Status { get; set; }
-
-    public IList<ReportDetail> Details { get; set; }
 
     public enum ReportStatus
     {

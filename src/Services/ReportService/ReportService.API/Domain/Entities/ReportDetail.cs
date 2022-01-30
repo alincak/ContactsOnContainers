@@ -5,6 +5,11 @@ namespace ReportService.API.Domain.Entities
 {
   public class ReportDetail
   {
+    [BsonId]
+    [BsonRepresentation(BsonType.ObjectId)]
+    public string Id { get; set; }
+    [BsonRepresentation(BsonType.ObjectId)]
+    public string ReportId { get; set; }
     [BsonRepresentation(BsonType.String)]
     public string Location { get; set; }
     [BsonRepresentation(BsonType.Int32)]

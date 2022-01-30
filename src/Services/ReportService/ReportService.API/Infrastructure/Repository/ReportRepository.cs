@@ -7,6 +7,7 @@ namespace ReportService.API.Infrastructure.Repository
   public class ReportRepository : IReportRepository
   {
     private readonly IMongoCollection<Report> _reportCollection;
+    private readonly IMongoCollection<ReportDetail> _reportDetailCollection;
 
     public ReportRepository(IDatabaseSettings databaseSettings)
     {
@@ -14,21 +15,33 @@ namespace ReportService.API.Infrastructure.Repository
       var db = client.GetDatabase(databaseSettings.DatabaseName);
 
       _reportCollection = db.GetCollection<Report>(databaseSettings.ReportCollectionName);
+      _reportDetailCollection = db.GetCollection<ReportDetail>(databaseSettings.ReportDetailCollectionName);
     }
 
-    public Task<Report> CreateReportAsync()
+    public async Task<Report> CreateReportAsync()
     {
-      throw new NotImplementedException();
+      var newReport = new Report(DateTime.UtcNow, Report.ReportStatus.Preparing);
+
+      await _reportCollection.InsertOneAsync(newReport);
+
+      return newReport;
     }
 
-    public Task<IList<Report>> GetAllAsync()
+    public async Task<IList<Report>> GetAllReportsAsync()
     {
-      throw new NotImplementedException();
+      return await _reportCollection.Find(x => true)
+        .ToListAsync();
     }
 
-    public Task<Report> GetReportByIdAsync(string id)
+    public async Task<Report> GetReportByIdAsync(string id)
     {
-      throw new NotImplementedException();
+      return await _reportCollection.Find(x => x.Id == id).FirstAsync();
     }
+
+    public async Task<IList<ReportDetail>> GetDetailsByReportIdAsync(string reportId)
+    {
+      return await _reportDetailCollection.Find(x => x.ReportId == reportId).ToListAsync();
+    }
+
   }
 }

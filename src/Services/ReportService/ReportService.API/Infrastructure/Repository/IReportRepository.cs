@@ -5,7 +5,8 @@ namespace ReportService.API.Infrastructure.Repository
   public interface IReportRepository
   {
     Task<Report> CreateReportAsync();
-    Task<IList<Report>> GetAllAsync();
+    Task<IList<Report>> GetAllReportsAsync();
     Task<Report> GetReportByIdAsync(string id);
+    Task<IList<ReportDetail>> GetDetailsByReportIdAsync(string reportId);
   }
 }
