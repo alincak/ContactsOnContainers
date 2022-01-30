@@ -1,5 +1,6 @@
 using Microsoft.Extensions.Options;
 using ReportService.API.Configurations.Settings;
+using ReportService.API.Configurations.Startup;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -16,7 +17,12 @@ builder.Services.AddSingleton<IDatabaseSettings>(sp =>
   return sp.GetRequiredService<IOptions<DatabaseSettings>>().Value;
 });
 
+var rabbitMQConfig = new RabbitMQConfig();
+rabbitMQConfig.ConfigureService(builder.Services);
+
 var app = builder.Build();
+
+rabbitMQConfig.ConfigureEventBusForSubscription(app);
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())

@@ -1,11 +1,11 @@
-﻿using ContactService.API.IntegrationEvents.EventHandlers;
-using ContactService.API.IntegrationEvents.Events;
-using EventBus.Base;
+﻿using EventBus.Base;
 using EventBus.Base.Abstraction;
 using EventBus.Factory;
 using RabbitMQ.Client;
+using ReportService.API.IntegrationEvents.EventHandlers;
+using ReportService.API.IntegrationEvents.Events;
 
-namespace ContactService.API.Configurations.Startup
+namespace ReportService.API.Configurations.Startup
 {
   public class RabbitMQConfig
   {
@@ -17,7 +17,7 @@ namespace ContactService.API.Configurations.Startup
         {
           ConnectionRetryCount = 5,
           EventNameSuffix = "IntegrationEvent",
-          SubscriberClientAppName = "ContactService",
+          SubscriberClientAppName = "ReportService",
           Connection = new ConnectionFactory()
           {
             HostName = "c_rabbitmq"
@@ -34,7 +34,7 @@ namespace ContactService.API.Configurations.Startup
     {
       var eventBus = app.ApplicationServices.GetRequiredService<IEventBus>();
 
-      eventBus.Subscribe<ReportStartedIntegrationEvent, ReportStartedIntegrationEventHandler>();
+      eventBus.Subscribe<ReportCreatedIntegrationEvent, ReportCreatedIntegrationEventHandler>();
     }
   }
 }
