@@ -18,7 +18,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Controllers\" />
+    <ProjectReference Include="..\..\Shared\ContactsOnContainers.Shared\ContactsOnContainers.Shared.csproj" />
   </ItemGroup>
 
 </Project>
