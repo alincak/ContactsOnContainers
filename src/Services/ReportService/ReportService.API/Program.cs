@@ -1,6 +1,7 @@
 using Microsoft.Extensions.Options;
 using ReportService.API.Configurations.Extensions;
 using ReportService.API.Configurations.Settings;
+using ReportService.API.Infrastructure.Repository;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -16,6 +17,10 @@ builder.Services.AddSingleton<IDatabaseSettings>(sp =>
 {
   return sp.GetRequiredService<IOptions<DatabaseSettings>>().Value;
 });
+
+builder.Services.AddScoped<IReportRepository, ReportRepository>();
+
+builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
 builder.ConfigureConsul();
 
