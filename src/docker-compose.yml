@@ -2,29 +2,27 @@ version: '3.4'
 
 services:
   web.apigateway:
-    container_name: c_apigateway
     image: ${DOCKER_REGISTRY-}webapigateway
     build:
       context: .
       dockerfile: ApiGateways/Web.ApiGateway/Dockerfile
 
   contactservice.api:
-    container_name: c_contactservice
     image: ${DOCKER_REGISTRY-}contactserviceapi
     build:
       context: .
-      dockerfile: Services/ContactService/ContactService.Api/Dockerfile
+      dockerfile: Services/ContactService/ContactService.API/Dockerfile
+
 
   reportservice.api:
-    container_name: c_reportservice
     image: ${DOCKER_REGISTRY-}reportserviceapi
     build:
       context: .
-      dockerfile: Services/ReportService/ReportService.Api/Dockerfile
+      dockerfile: Services/ReportService/ReportService.API/Dockerfile
 
 
 
-  
+
   s_contactdb:
     container_name: c_contactdb
     image: mongo
