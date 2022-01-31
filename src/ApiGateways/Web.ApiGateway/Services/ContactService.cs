@@ -18,9 +18,9 @@ namespace Web.ApiGateway.Services
       this.httpClient = httpClientFactory.CreateClient("contact");
     }
 
-    public async Task<ContactVo> CreateContactAsync(ContactVo contact)
+    public async Task<ContactData> CreateContactAsync(ContactData contact)
     {
-      return await httpClient.PostGetResponseAsync<ContactVo, ContactVo>(contact);
+      return await httpClient.PostGetResponseAsync<ContactData, ContactData>(contact);
     }
 
     public async Task<bool> DeleteContactAsync(string id)
@@ -28,16 +28,16 @@ namespace Web.ApiGateway.Services
       return await httpClient.DeleteResponseAsync<bool>(id);
     }
 
-    public async Task<IList<ContactVo>> GetAllAsync()
+    public async Task<IList<ContactData>> GetAllAsync()
     {
-      var response = await httpClient.GetResponseAsync<IList<ContactVo>>();
+      var response = await httpClient.GetResponseAsync<IList<ContactData>>();
 
       return response;
     }
 
-    public async Task<ContactVo> GetContactByIdAsync(string id)
+    public async Task<ContactData> GetContactByIdAsync(string id)
     {
-      var response = await httpClient.GetResponseAsync<ContactVo>(id);
+      var response = await httpClient.GetResponseAsync<ContactData>(id);
 
       return response;
     }

@@ -4,9 +4,9 @@ namespace Web.ApiGateway.Services
 {
   public interface IContactService
   {
-    Task<ContactVo> CreateContactAsync(ContactVo contact);
+    Task<ContactData> CreateContactAsync(ContactData contact);
     Task<bool> DeleteContactAsync(string id);
-    Task<IList<ContactVo>> GetAllAsync();
-    Task<ContactVo> GetContactByIdAsync(string id);
+    Task<IList<ContactData>> GetAllAsync();
+    Task<ContactData> GetContactByIdAsync(string id);
   }
 }
