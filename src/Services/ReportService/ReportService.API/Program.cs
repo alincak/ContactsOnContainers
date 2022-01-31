@@ -1,4 +1,5 @@
 using Microsoft.Extensions.Options;
+using ReportService.API.Configurations.Extensions;
 using ReportService.API.Configurations.Settings;
 using ReportService.API.Configurations.Startup;
 
@@ -16,6 +17,8 @@ builder.Services.AddSingleton<IDatabaseSettings>(sp =>
 {
   return sp.GetRequiredService<IOptions<DatabaseSettings>>().Value;
 });
+
+builder.ConfigureConsul();
 
 var rabbitMQConfig = new RabbitMQConfig();
 rabbitMQConfig.ConfigureService(builder.Services);
@@ -36,5 +39,7 @@ app.UseHttpsRedirection();
 app.UseAuthorization();
 
 app.MapControllers();
+
+app.RegisterWithConsul(app.Lifetime, app.Configuration);
 
 app.Run();
