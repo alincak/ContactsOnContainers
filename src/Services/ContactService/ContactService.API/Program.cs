@@ -1,3 +1,4 @@
+using ContactService.API.Configurations.Extensions;
 using ContactService.API.Configurations.Settings;
 using ContactService.API.Configurations.Startup;
 using ContactService.API.Infrastructure.Repository;
@@ -22,6 +23,8 @@ builder.Services.AddScoped<IContactRepository, ContactRepository>();
 
 builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
+builder.ConfigureConsul();
+
 var rabbitMQConfig = new RabbitMQConfig();
 rabbitMQConfig.ConfigureService(builder.Services);
 
@@ -41,5 +44,7 @@ app.UseHttpsRedirection();
 app.UseAuthorization();
 
 app.MapControllers();
+
+app.RegisterWithConsul(app.Lifetime, app.Configuration);
 
 app.Run();
