@@ -5,11 +5,11 @@ using RabbitMQ.Client;
 using ReportService.API.IntegrationEvents.EventHandlers;
 using ReportService.API.IntegrationEvents.Events;
 
-namespace ReportService.API.Configurations.Startup
+namespace ReportService.API.Configurations.Extensions
 {
-  public class RabbitMQConfig
+  public static class RabbitMQRegistration
   {
-    public void ConfigureService(IServiceCollection services)
+    public static void ConfigureRabbitMQ(this IServiceCollection services)
     {
       services.AddSingleton(sp =>
       {
@@ -30,7 +30,7 @@ namespace ReportService.API.Configurations.Startup
       });
     }
 
-    public void ConfigureEventBusForSubscription(IApplicationBuilder app)
+    public static void ConfigureEventBusForSubscription(this IApplicationBuilder app)
     {
       var eventBus = app.ApplicationServices.GetRequiredService<IEventBus>();
 

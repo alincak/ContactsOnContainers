@@ -5,11 +5,11 @@ using EventBus.Base.Abstraction;
 using EventBus.Factory;
 using RabbitMQ.Client;
 
-namespace ContactService.API.Configurations.Startup
+namespace ContactService.API.Configurations.Extensions
 {
-  public class RabbitMQConfig
+  public static class RabbitMQRegistration
   {
-    public void ConfigureService(IServiceCollection services)
+    public static void ConfigureRabbitMQ(this IServiceCollection services)
     {
       services.AddSingleton(sp =>
       {
@@ -23,14 +23,13 @@ namespace ContactService.API.Configurations.Startup
             HostName = "c_rabbitmq"
           },
           EventBusType = EventBusType.RabbitMQ,
-
         };
 
         return EventBusFactory.Create(config, sp);
       });
     }
 
-    public void ConfigureEventBusForSubscription(IApplicationBuilder app)
+    public static void ConfigureEventBusForSubscription(this IApplicationBuilder app)
     {
       var eventBus = app.ApplicationServices.GetRequiredService<IEventBus>();
 
