@@ -1,0 +1,46 @@
+version: '3.4'
+
+services:
+  web.apigateway:
+    container_name: c_apigateway
+    image: ${DOCKER_REGISTRY-}webapigateway
+    build:
+      context: .
+      dockerfile: ApiGateways/Web.ApiGateway/Dockerfile
+
+  contactservice.api:
+    container_name: c_contactservice
+    image: ${DOCKER_REGISTRY-}contactserviceapi
+    build:
+      context: .
+      dockerfile: Services/ContactService/ContactService.Api/Dockerfile
+
+  reportservice.api:
+    container_name: c_reportservice
+    image: ${DOCKER_REGISTRY-}reportserviceapi
+    build:
+      context: .
+      dockerfile: Services/ReportService/ReportService.Api/Dockerfile
+
+
+
+  
+  s_contactdb:
+    container_name: c_contactdb
+    image: mongo
+    ports: 
+      - 27017:27017
+
+  s_reportdb:
+    container_name: c_reportdb
+    image: mongo
+    ports: 
+      - 27018:27018
+
+  s_rabbitmq:
+    container_name: c_rabbitmq
+    image: rabbitmq:3-management
+
+  s_consul:
+    container_name: c_consul
+    image: consul
