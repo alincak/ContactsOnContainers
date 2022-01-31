@@ -1,7 +1,5 @@
 ﻿using MongoDB.Bson;
 using MongoDB.Bson.Serialization.Attributes;
-using Newtonsoft.Json.Converters;
-using System.Text.Json.Serialization;
 
 namespace ContactService.API.Domain.Entities
 {
