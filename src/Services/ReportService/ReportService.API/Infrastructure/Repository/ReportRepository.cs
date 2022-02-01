@@ -43,5 +43,9 @@ namespace ReportService.API.Infrastructure.Repository
       return await _reportDetailCollection.Find(x => x.ReportId == reportId).ToListAsync();
     }
 
+    public async Task CreateReportDetailsAsync(IList<ReportDetail> reportDetails)
+    {
+      await _reportDetailCollection.InsertManyAsync(reportDetails);
+    }
   }
 }

@@ -8,5 +8,6 @@ namespace ReportService.API.Infrastructure.Repository
     Task<IList<Report>> GetAllReportsAsync();
     Task<Report> GetReportByIdAsync(string id);
     Task<IList<ReportDetail>> GetDetailsByReportIdAsync(string reportId);
+    Task CreateReportDetailsAsync(IList<ReportDetail> reportDetails);
   }
 }

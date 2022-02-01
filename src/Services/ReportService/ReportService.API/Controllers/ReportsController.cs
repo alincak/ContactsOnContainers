@@ -1,7 +1,9 @@
 using AutoMapper;
 using ContactsOnContainers.Shared.Models.ResponseModels;
+using EventBus.Base.Abstraction;
 using Microsoft.AspNetCore.Mvc;
 using ReportService.API.Infrastructure.Repository;
+using ReportService.API.IntegrationEvents.Events;
 using ReportService.API.Models;
 using System.Net;
 
@@ -13,11 +15,13 @@ namespace ReportService.API.Controllers
   {
     private readonly IReportRepository _repository;
     private readonly IMapper _mapper;
+    private readonly IEventBus _eventBus;
 
-    public ReportsController(IReportRepository repository, IMapper mapper)
+    public ReportsController(IReportRepository repository, IMapper mapper, IEventBus eventBus)
     {
       _repository = repository;
       _mapper = mapper;
+      _eventBus = eventBus;
     }
 
     [HttpGet]
@@ -43,6 +47,9 @@ namespace ReportService.API.Controllers
       var newReport = await _repository.CreateReportAsync();
 
       if (newReport == null) return BadRequest();
+
+      var reportStartedEventModel = new ReportStartedIntegrationEvent(newReport.Id);
+      _eventBus.Publish(reportStartedEventModel);
 
       var result = new ResultId<string> { Id = newReport.Id };
       return CustomResponse<ResultId<string>>.Success(result, (int)HttpStatusCode.Created);
