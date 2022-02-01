@@ -32,7 +32,7 @@
       "DownstreamHostAndPorts": [
         {
           "Host": "reportservice.api",
-          "Port": 5001
+          "Port": 5002
         }
       ],
       "UpstreamPathTemplate": "/reports/{everything}",
@@ -40,15 +40,15 @@
       "UpstreamScheme": "http"
     },
     {
-      "DownstreamPathTemplate": "/api/reports",
+      "DownstreamPathTemplate": "/api/reports/",
       "DownstreamScheme": "http",
       "DownstreamHostAndPorts": [
         {
           "Host": "reportservice.api",
-          "Port": 5001
+          "Port": 5002
         }
       ],
-      "UpstreamPathTemplate": "/reports",
+      "UpstreamPathTemplate": "/reports/",
       "UpstreamHttpMethod": [ "Get", "Post" ],
       "UpstreamScheme": "http"
     }

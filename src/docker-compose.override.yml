@@ -39,7 +39,7 @@ services:
       - s_reportdb
       - s_rabbitmq
     external_links:
-      - s_contactdb
+      - s_reportdb
       - s_rabbitmq
   s_rabbitmq:
     ports:
