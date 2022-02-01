@@ -26,14 +26,10 @@ services:
   s_contactdb:
     container_name: c_contactdb
     image: mongo
-    ports: 
-      - 27017:27017
 
   s_reportdb:
     container_name: c_reportdb
     image: mongo
-    ports: 
-      - 27018:27018
 
   s_rabbitmq:
     container_name: c_rabbitmq

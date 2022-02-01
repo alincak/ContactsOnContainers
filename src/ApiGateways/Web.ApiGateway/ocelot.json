@@ -12,6 +12,16 @@
     },
     {
       "UseServiceDiscovery": true,
+      "ServiceName": "ContactService",
+      "DownstreamPathTemplate": "/api/contacts/",
+      "DownstreamScheme": "http",
+
+      "UpstreamPathTemplate": "/contacts/",
+      "UpstreamHttpMethod": [ "Get" ],
+      "UpstreamScheme": "http"
+    },
+    {
+      "UseServiceDiscovery": true,
       "ServiceName": "ReportService",
       "DownstreamPathTemplate": "/api/reports/{everything}",
       "DownstreamScheme": "http",
