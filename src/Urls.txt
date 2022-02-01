@@ -1,0 +1,5 @@
+
+
+Web.ApiGateway          -> http://localhost:5000
+ContactService.API          -> http://localhost:5001
+ReportService.API          -> http://localhost:5002
