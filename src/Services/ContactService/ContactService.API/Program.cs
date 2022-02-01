@@ -22,8 +22,6 @@ builder.Services.AddScoped<IContactRepository, ContactRepository>();
 
 builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
-builder.ConfigureConsul();
-
 builder.ConfigureRabbitMQ();
 
 var app = builder.Build();
@@ -40,7 +38,5 @@ if (app.Environment.IsDevelopment())
 app.UseHttpsRedirection();
 
 app.MapControllers();
-
-app.RegisterWithConsul(app.Lifetime, app.Configuration);
 
 app.Run();

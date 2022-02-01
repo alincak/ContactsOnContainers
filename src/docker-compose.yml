@@ -34,7 +34,3 @@ services:
   s_rabbitmq:
     container_name: c_rabbitmq
     image: rabbitmq:3-management
-
-  s_consul:
-    container_name: c_consul
-    image: consul

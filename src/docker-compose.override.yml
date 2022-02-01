@@ -14,10 +14,6 @@ services:
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
       - ASPNETCORE_URLS=http://+:5001
-      - ConsulConfig__Address=http://s_consul:8500
-      - ConsulConfig__ServiceAddress=http://c_contactservice:5001
-      - ConsulConfig__ServiceName=ContactService
-      - ConsulConfig__ServiceId=Contact
     ports:
      - "5001:5001"
     networks:
@@ -25,21 +21,15 @@ services:
     depends_on:
       - web.apigateway
       - s_contactdb
-      - s_consul
       - s_rabbitmq
     external_links:
       - s_contactdb
-      - s_consul
       - s_rabbitmq
 
   reportservice.api:
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
       - ASPNETCORE_URLS=http://+:5002
-      - ConsulConfig__Address=http://s_consul:8500
-      - ConsulConfig__ServiceAddress=http://c_reportservice:5002
-      - ConsulConfig__ServiceName=ReportService
-      - ConsulConfig__ServiceId=Report
     ports:
       - "5002:5002"
     networks:
@@ -47,21 +37,10 @@ services:
     depends_on:
       - web.apigateway
       - s_reportdb
-      - s_consul
       - s_rabbitmq
     external_links:
       - s_contactdb
-      - s_consul
       - s_rabbitmq
-  s_consul:
-    ports:
-      - 8500:8500
-      - 8600:8600/tcp
-      - 8600:8600/udp
-    networks:
-      - net_apigateway
-      - net_frontend
-      - net_backendservices
   s_rabbitmq:
     ports:
       - 5672:5672
@@ -71,7 +50,6 @@ services:
     networks:
       - net_backendservices
       - net_apigateway
-      - net_frontend
   s_contactdb:
     ports:
       - 27017:27017
@@ -85,9 +63,6 @@ services:
 
 networks:
   net_apigateway:
-    driver: bridge
-    external: true
-  net_frontend:
     driver: bridge
     external: true
   net_backendservices:

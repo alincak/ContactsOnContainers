@@ -1,6 +1,5 @@
 using Ocelot.DependencyInjection;
 using Ocelot.Middleware;
-using Ocelot.Provider.Consul;
 using Web.ApiGateway.Configurations.ConfigHttpClient;
 using Web.ApiGateway.Services;
 
@@ -32,7 +31,7 @@ builder.Host
 builder.Services.AddScoped<IContactService, ContactService>();
 builder.Services.AddScoped<IReportService, ReportService>();
 
-builder.Services.AddOcelot().AddConsul();
+builder.Services.AddOcelot();
 
 builder.Services.AddCors(options =>
 {
