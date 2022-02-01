@@ -1,7 +1,5 @@
 using Ocelot.DependencyInjection;
 using Ocelot.Middleware;
-using Web.ApiGateway.Configurations.ConfigHttpClient;
-using Web.ApiGateway.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -28,9 +26,6 @@ builder.Host
   options.ValidateScopes = false;
 });
 
-builder.Services.AddScoped<IContactService, ContactService>();
-builder.Services.AddScoped<IReportService, ReportService>();
-
 builder.Services.AddOcelot();
 
 builder.Services.AddCors(options =>
@@ -41,8 +36,6 @@ builder.Services.AddCors(options =>
       .AllowAnyHeader()
       .AllowCredentials());
 });
-
-new ConfigureHttpClient(builder).Setup();
 
 var app = builder.Build();
 
