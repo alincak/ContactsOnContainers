@@ -11,12 +11,12 @@
   "profiles": {
     "ContactService.API": {
       "commandName": "Project",
-      "launchBrowser": true,
+      "launchBrowser": false,
       "launchUrl": "swagger",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"
       },
-      "applicationUrl": "https://localhost:7114;http://localhost:5114",
+      "applicationUrl": "http://localhost:5003",
       "dotnetRunMessages": true
     },
     "IIS Express": {

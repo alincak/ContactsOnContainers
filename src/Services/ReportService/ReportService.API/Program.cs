@@ -24,7 +24,7 @@ builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
 builder.ConfigureConsul();
 
-builder.Services.ConfigureRabbitMQ();
+builder.ConfigureRabbitMQ();
 
 var app = builder.Build();
 

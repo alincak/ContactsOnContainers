@@ -9,18 +9,19 @@ namespace ContactService.API.Configurations.Extensions
 {
   public static class RabbitMQRegistration
   {
-    public static void ConfigureRabbitMQ(this IServiceCollection services)
+    public static void ConfigureRabbitMQ(this WebApplicationBuilder builder)
     {
-      services.AddSingleton(sp =>
+      builder.Services.AddSingleton(sp =>
       {
         EventBusConfig config = new()
         {
           ConnectionRetryCount = 5,
-          EventNameSuffix = "IntegrationEvent",
-          SubscriberClientAppName = "ContactService",
+          EventNameSuffix = builder.Configuration.GetValue<string>("RabbitMQConfig:EventNameSuffix"),
+          SubscriberClientAppName = builder.Configuration.GetValue<string>("RabbitMQConfig:SubscriberClientAppName"),
           Connection = new ConnectionFactory()
           {
-            HostName = "c_rabbitmq"
+            HostName = builder.Configuration.GetValue<string>("RabbitMQConfig:HostName"),
+            Port = builder.Configuration.GetValue<int>("RabbitMQConfig:Port")
           },
           EventBusType = EventBusType.RabbitMQ,
         };
