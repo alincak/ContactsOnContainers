@@ -10,7 +10,20 @@
         }
       ],
       "UpstreamPathTemplate": "/contacts/{everything}",
-      "UpstreamHttpMethod": [ "Get", "Post", "Delete", "Put" ],
+      "UpstreamHttpMethod": [ "Get", "Post", "Delete" ],
+      "UpstreamScheme": "http"
+    },
+    {
+      "DownstreamPathTemplate": "/api/contacts/",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "contactservice.api",
+          "Port": 5001
+        }
+      ],
+      "UpstreamPathTemplate": "/contacts/",
+      "UpstreamHttpMethod": [ "Get" ],
       "UpstreamScheme": "http"
     },
     {
@@ -24,6 +37,19 @@
       ],
       "UpstreamPathTemplate": "/reports/{everything}",
       "UpstreamHttpMethod": [ "Get", "Post", "Delete", "Put" ],
+      "UpstreamScheme": "http"
+    },
+    {
+      "DownstreamPathTemplate": "/api/reports",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "reportservice.api",
+          "Port": 5001
+        }
+      ],
+      "UpstreamPathTemplate": "/reports",
+      "UpstreamHttpMethod": [ "Get", "Post" ],
       "UpstreamScheme": "http"
     }
   ],
