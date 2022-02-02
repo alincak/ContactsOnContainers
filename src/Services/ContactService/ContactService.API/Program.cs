@@ -1,6 +1,7 @@
 using ContactService.API.Configurations.Extensions;
 using ContactService.API.Configurations.Settings;
 using ContactService.API.Infrastructure.Repository;
+using ContactsOnContainers.Shared.Middlewares.Errors;
 using Microsoft.Extensions.Options;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -34,6 +35,9 @@ if (app.Environment.IsDevelopment())
   app.UseSwagger();
   app.UseSwaggerUI();
 }
+
+// global error handler
+app.UseMiddleware<ErrorHandlerMiddleware>();
 
 app.UseHttpsRedirection();
 

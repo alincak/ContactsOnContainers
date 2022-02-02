@@ -1,3 +1,4 @@
+using ContactsOnContainers.Shared.Middlewares.Errors;
 using Microsoft.Extensions.Options;
 using ReportService.API.Configurations.Extensions;
 using ReportService.API.Configurations.Settings;
@@ -34,6 +35,9 @@ if (app.Environment.IsDevelopment())
   app.UseSwagger();
   app.UseSwaggerUI();
 }
+
+// global error handler
+app.UseMiddleware<ErrorHandlerMiddleware>();
 
 app.UseHttpsRedirection();
 
