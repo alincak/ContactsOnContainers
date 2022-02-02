@@ -1,5 +1,6 @@
 ﻿using ContactService.API.Configurations.Settings;
 using ContactService.API.Domain.Entities;
+using MongoDB.Bson;
 using MongoDB.Driver;
 
 namespace ContactService.API.Infrastructure.Repository
@@ -64,6 +65,13 @@ namespace ContactService.API.Infrastructure.Repository
       var result = await _contactInfoCollection.DeleteOneAsync(x => x.Id == id);
 
       return result.DeletedCount > 0;
+    }
+
+    public async Task<bool> GetContactsHasDocumentForDummyDataAsync()
+    {
+      var count = await _contactCollection.CountDocumentsAsync(new BsonDocument());
+      
+      return count > 0;
     }
   }
 }

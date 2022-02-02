@@ -4,6 +4,7 @@ namespace ContactService.API.Infrastructure.Repository
 {
   public interface IContactRepository
   {
+    Task<bool> GetContactsHasDocumentForDummyDataAsync();
     Task<IList<Contact>> GetAllContactsAsync();
     Task<Contact> GetContactByIdAsync(string id);
     Task<Contact> CreateContactAsync(Contact contact);

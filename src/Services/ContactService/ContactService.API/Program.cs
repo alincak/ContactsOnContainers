@@ -1,3 +1,4 @@
+using ContactService.API.Configurations;
 using ContactService.API.Configurations.Extensions;
 using ContactService.API.Configurations.Settings;
 using ContactService.API.Infrastructure.Repository;
@@ -42,5 +43,7 @@ app.UseMiddleware<ErrorHandlerMiddleware>();
 app.UseHttpsRedirection();
 
 app.MapControllers();
+
+await app.CreateDBDummyData();
 
 app.Run();
