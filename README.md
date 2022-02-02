@@ -1,5 +1,5 @@
 # Kişi Rehberi ve Raporlama
-Birbirleri ile haberleşen minimum iki microservice'in olduğu bir yapıdır. Basit bir telefon rehberi ve konuma göre raporlanma uygulaması oluşturulması hedeflenmiştir. 
+Birbirleri ile haberleşen minimum iki microservice'in olduğu bir yapıdır. Basit bir telefon rehberi ve konuma göre raporlanma oluşturulması hedeflenmiştir. 
 
 ## Çalıştırma (Running) ve Kullanımı (How to use)
 `docker compose up` : Bu komutu src içerisinde çalıştırarak projeyi ayağa kaldırabilirsiniz.
