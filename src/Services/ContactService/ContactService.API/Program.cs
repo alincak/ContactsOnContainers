@@ -18,7 +18,7 @@ builder.Services.AddSingleton<IDatabaseSettings>(sp =>
   return sp.GetRequiredService<IOptions<DatabaseSettings>>().Value;
 });
 
-builder.Services.AddScoped<IContactRepository, ContactRepository>();
+builder.Services.AddTransient<IContactRepository, ContactRepository>();
 
 builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 

@@ -28,6 +28,8 @@ namespace ContactService.API.Configurations.Extensions
 
         return EventBusFactory.Create(config, sp);
       });
+
+      builder.Services.AddTransient<ReportStartedIntegrationEventHandler>();
     }
 
     public static void ConfigureEventBusForSubscription(this IApplicationBuilder app)

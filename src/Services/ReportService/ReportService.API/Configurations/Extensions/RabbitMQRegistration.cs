@@ -29,6 +29,8 @@ namespace ReportService.API.Configurations.Extensions
 
         return EventBusFactory.Create(config, sp);
       });
+
+      builder.Services.AddTransient<ReportCreatedIntegrationEventHandler>();
     }
 
     public static void ConfigureEventBusForSubscription(this IApplicationBuilder app)
