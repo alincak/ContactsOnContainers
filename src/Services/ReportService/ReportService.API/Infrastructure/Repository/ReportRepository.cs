@@ -47,5 +47,15 @@ namespace ReportService.API.Infrastructure.Repository
     {
       await _reportDetailCollection.InsertManyAsync(reportDetails);
     }
+
+    public async Task ReportCompletedAsync(string id)
+    {
+      var filter = Builders<Report>.Filter.Eq(s => s.Id, id);
+      var update = Builders<Report>.Update
+        .Set(s => s.Status, Report.ReportStatus.Completed)
+        .Set(s => s.CompletedDate, DateTime.UtcNow);
+
+      await _reportCollection.UpdateOneAsync(filter, update);
+    }
   }
 }

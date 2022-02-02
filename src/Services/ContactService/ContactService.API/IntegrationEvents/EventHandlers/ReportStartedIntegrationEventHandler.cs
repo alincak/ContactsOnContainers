@@ -22,13 +22,21 @@ namespace ContactService.API.IntegrationEvents.EventHandlers
     {
       logger.LogInformation("----- Handling integration event: {IntegrationEventId} at ContactService.API - ({@IntegrationEvent})", @event.ReportId, @event);
 
+      var eventModel = new ReportCreatedIntegrationEvent(@event.ReportId);
+
       var contactInfos = await repository.GetAllContactInfosAsync();
-      if (contactInfos == null || !contactInfos.Any()) return;
+      if (contactInfos == null || !contactInfos.Any())
+      {
+        eventBus.Publish(eventModel);
+        return;
+      }
 
       var locations = contactInfos.Where(x => x.InfoType == ContactInfo.ContactInfoType.Location);
-      if (locations == null || !locations.Any()) return;
-
-      var eventModel = new ReportCreatedIntegrationEvent(@event.ReportId);
+      if (locations == null || !locations.Any())
+      {
+        eventBus.Publish(eventModel);
+        return;
+      }
 
       var distinctLocations = locations.Select(x => x.Value).Distinct();
       foreach (var location in distinctLocations)
@@ -47,7 +55,14 @@ namespace ContactService.API.IntegrationEvents.EventHandlers
           eventModel.AddDetail(location, contacts.Count(), phoneNumbers);
       }
 
-      eventBus.Publish(eventModel);
+      try
+      {
+        eventBus.Publish(eventModel);
+      }
+      catch (Exception)
+      {
+        //logs
+      }
     }
 
   }

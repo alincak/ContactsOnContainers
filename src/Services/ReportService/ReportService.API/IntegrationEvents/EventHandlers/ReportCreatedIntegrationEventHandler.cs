@@ -23,6 +23,17 @@ namespace ReportService.API.IntegrationEvents.EventHandlers
       var report = await repository.GetReportByIdAsync(@event.ReportId);
       if (report == null) return;
 
+      try
+      {
+        await repository.ReportCompletedAsync(report.Id);
+      }
+      catch
+      {
+        //logs
+      }
+
+      if (@event.Details == null) return;
+
       var details = @event.Details
         .Select(x => new ReportDetail(@event.ReportId, x.Location, x.ContactCount, x.PhoneNumberCount))
         .ToList();
