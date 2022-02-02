@@ -1,12 +1,11 @@
-﻿using ContactService.API.Domain.Entities;
-using Newtonsoft.Json.Converters;
-using System.ComponentModel.DataAnnotations;
-using System.Text.Json.Serialization;
+﻿using System.ComponentModel.DataAnnotations;
 
 namespace ContactService.API.Models
 {
   public class ContactInfoVo : IValidatableObject
   {
+    public string Id { get; set; }
+    public string ContactId { get; set; }
     public int InfoType { get; set; }
     public string Value { get; set; }
 
@@ -17,6 +16,11 @@ namespace ContactService.API.Models
       if (string.IsNullOrEmpty(Value))
       {
         yield return new ValidationResult("Cannot be empty", new[] { "Value" });
+      }
+
+      if (string.IsNullOrEmpty(ContactId))
+      {
+        yield return new ValidationResult("Cannot be empty", new[] { "ContactId" });
       }
     }
 

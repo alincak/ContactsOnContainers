@@ -9,6 +9,7 @@ namespace ContactService.API.Mapping
     public GeneralMapping()
     {
       CreateMap<Report, ReportVo>().ReverseMap();
+      CreateMap<Report, ReportIndexVo>().ReverseMap();
       CreateMap<ReportDetail, ReportDetailsVo>().ReverseMap();
     }
   }

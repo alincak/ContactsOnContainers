@@ -37,18 +37,18 @@ namespace ContactService.API.Controllers
     }
 
     [HttpGet]
-    [ProducesResponseType(typeof(CustomResponse<IList<ContactVo>>), (int)HttpStatusCode.OK)]
-    public async Task<IActionResult> GetAll()
+    [ProducesResponseType(typeof(CustomResponse<IList<ContactIndexVo>>), (int)HttpStatusCode.OK)]
+    public async Task<IActionResult> GetAllContacts()
     {
-      var list = await _repository.GetAllAsync();
+      var list = await _repository.GetAllContactsAsync();
 
-      IList<ContactVo> contacts = null;
+      IList<ContactIndexVo> contacts = null;
       if (true)
       {
-        contacts = _mapper.Map<IList<ContactVo>>(list);
+        contacts = _mapper.Map<IList<ContactIndexVo>>(list);
       }
 
-      return CustomResponse<IList<ContactVo>>.Success(contacts, (int)HttpStatusCode.OK);
+      return CustomResponse<IList<ContactIndexVo>>.Success(contacts, (int)HttpStatusCode.OK);
     }
 
     [HttpGet("{id}")]
@@ -76,7 +76,7 @@ namespace ContactService.API.Controllers
     [HttpPost]
     [ProducesResponseType(typeof(ResultId<string>), (int)HttpStatusCode.Created)]
     [ProducesResponseType((int)HttpStatusCode.BadRequest)]
-    public async Task<IActionResult> CreateContactAsync([FromBody] ContactVo model)
+    public async Task<IActionResult> CreateContactAsync([FromBody] ContactEditVo model)
     {
       var newContact = _mapper.Map<Contact>(model);
 
@@ -84,14 +84,22 @@ namespace ContactService.API.Controllers
 
       if (_contact == null) return BadRequest();
 
-      if (model.ContactInfos != null && model.ContactInfos.Any())
-      {
-        var contactInfos = model.ContactInfos.Select(x => new ContactInfo(_contact.Id, (ContactInfo.ContactInfoType)x.InfoType, x.Value)).ToList();
-
-        await _repository.UpdateContactInfosAsync(_contact.Id, contactInfos);
-      }
-
       var result = new ResultId<string> { Id = _contact.Id };
+      return CustomResponse<ResultId<string>>.Success(result, (int)HttpStatusCode.Created);
+    }
+
+    [HttpPost("info")]
+    [ProducesResponseType(typeof(ResultId<string>), (int)HttpStatusCode.Created)]
+    [ProducesResponseType((int)HttpStatusCode.BadRequest)]
+    public async Task<IActionResult> CreateContactInfoAsync([FromBody] ContactInfoVo model)
+    {
+      var newContactInfo = _mapper.Map<ContactInfo>(model);
+
+      var _contactInfo = await _repository.CreateContactInfoAsync(newContactInfo);
+
+      if (_contactInfo == null) return BadRequest();
+
+      var result = new ResultId<string> { Id = _contactInfo.Id };
       return CustomResponse<ResultId<string>>.Success(result, (int)HttpStatusCode.Created);
     }
 
@@ -101,6 +109,16 @@ namespace ContactService.API.Controllers
     public async Task<IActionResult> DeleteContactByIdAsync(string id)
     {
       var result = await _repository.DeleteContactAsync(id);
+
+      return result ? Ok() : BadRequest();
+    }
+
+    [HttpDelete("info/{id}")]
+    [ProducesResponseType((int)HttpStatusCode.OK)]
+    [ProducesResponseType((int)HttpStatusCode.BadRequest)]
+    public async Task<IActionResult> DeleteContactInfoByIdAsync(string id)
+    {
+      var result = await _repository.DeleteContactInfoAsync(id);
 
       return result ? Ok() : BadRequest();
     }

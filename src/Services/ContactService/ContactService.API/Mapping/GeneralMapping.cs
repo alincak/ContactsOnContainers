@@ -9,6 +9,8 @@ namespace ContactService.API.Mapping
     public GeneralMapping()
     {
       CreateMap<Contact, ContactVo>().ReverseMap();
+      CreateMap<Contact, ContactIndexVo>().ReverseMap();
+      CreateMap<Contact, ContactEditVo>().ReverseMap();
       CreateMap<ContactInfo, ContactInfoVo>().ReverseMap();
     }
   }

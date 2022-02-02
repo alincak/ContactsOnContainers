@@ -18,10 +18,11 @@ namespace ContactService.API.Infrastructure.Repository
       _contactInfoCollection = db.GetCollection<ContactInfo>(databaseSettings.ContactInfoCollectionName);
     }
 
-    public async Task UpdateContactInfosAsync(string contactId, IList<ContactInfo> contactInfos)
+    public async Task<ContactInfo> CreateContactInfoAsync(ContactInfo contactInfo)
     {
-      _contactInfoCollection.DeleteMany(x => x.ContactId == contactId);
-      await _contactInfoCollection.InsertManyAsync(contactInfos);
+      await _contactInfoCollection.InsertOneAsync(contactInfo);
+
+      return contactInfo;
     }
 
     public async Task<Contact> CreateContactAsync(Contact contact)
@@ -38,7 +39,7 @@ namespace ContactService.API.Infrastructure.Repository
       return result.DeletedCount > 0;
     }
 
-    public async Task<IList<Contact>> GetAllAsync()
+    public async Task<IList<Contact>> GetAllContactsAsync()
     {
       return await _contactCollection.Find(c => true).ToListAsync();
     }
@@ -56,6 +57,13 @@ namespace ContactService.API.Infrastructure.Repository
     public async Task<IList<ContactInfo>> GetAllContactInfosAsync()
     {
       return await _contactInfoCollection.Find(c => true).ToListAsync();
+    }
+
+    public async Task<bool> DeleteContactInfoAsync(string id)
+    {
+      var result = await _contactInfoCollection.DeleteOneAsync(x => x.Id == id);
+
+      return result.DeletedCount > 0;
     }
   }
 }

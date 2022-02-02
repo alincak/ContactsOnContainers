@@ -25,18 +25,18 @@ namespace ReportService.API.Controllers
     }
 
     [HttpGet]
-    [ProducesResponseType(typeof(CustomResponse<IList<ReportVo>>), (int)HttpStatusCode.OK)]
-    public async Task<IActionResult> GetAll()
+    [ProducesResponseType(typeof(CustomResponse<IList<ReportIndexVo>>), (int)HttpStatusCode.OK)]
+    public async Task<IActionResult> GetAllReports()
     {
       var list = await _repository.GetAllReportsAsync();
 
-      IList<ReportVo> reports = null;
+      IList<ReportIndexVo> reports = null;
       if (list != null && list.Any())
       {
-        reports = _mapper.Map<IList<ReportVo>>(list);
+        reports = _mapper.Map<IList<ReportIndexVo>>(list);
       }
 
-      return CustomResponse<IList<ReportVo>>.Success(reports, (int)HttpStatusCode.OK);
+      return CustomResponse<IList<ReportIndexVo>>.Success(reports, (int)HttpStatusCode.OK);
     }
 
     [HttpPost]
