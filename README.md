@@ -64,6 +64,24 @@ Kişi sil (Delete Contact): `curl -X 'DELETE' \
   '[BASE_ENDPOINT]/Contacts/info/61fa50e5e109d1e707380070' \
   -H 'accept: */*'`
 
+### Report Endpoints
+
+`[HttpGET] [BASE_ENDPOINT]/Reports`
+
+`[HttpPost] [BASE_ENDPOINT]/Reports`
+
+`[HttpGET] [BASE_ENDPOINT]/Reports/{id}`
+
+Swagger Adresi (Swagger Endpoint): http://localhost:5002/swagger/index.html
+
+- **Örnekler curl ile (Examples with curl)**
+
+Rapor listeleme (Report List): `curl -X 'GET' \ '[BASE_ENDPOINT]/Reports' \ -H 'accept: text/plain'`
+
+Rapor Oluşturma (Create Report): `curl -X 'POST' \ '[BASE_ENDPOINT]/Reports' \ -H 'accept: text/plain' \ -d ''`
+
+Rapor listeleme (Report List): `curl -X 'GET' \ '[BASE_ENDPOINT]/Reports/{id}' \ -H 'accept: text/plain'`
+
 ## Teknik Tasarım
 #### Kişiler
 Sistemde teorik anlamda sınırsız sayıda kişi kaydı yapılabilmektedir. Her kişiye bağlı iletişim bilgileri de yine sınırsız bir biçimde eklenebilmektedir.
