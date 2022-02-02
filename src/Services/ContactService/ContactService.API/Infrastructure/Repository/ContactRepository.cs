@@ -46,7 +46,7 @@ namespace ContactService.API.Infrastructure.Repository
 
     public async Task<Contact> GetContactByIdAsync(string id)
     {
-      return await _contactCollection.Find(x => x.Id == id).FirstAsync();
+      return await _contactCollection.Find(x => x.Id == id).FirstOrDefaultAsync();
     }
 
     public async Task<IList<ContactInfo>> GetContactInfosByContactIdAsync(string contactId)

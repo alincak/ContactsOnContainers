@@ -35,7 +35,7 @@ namespace ReportService.API.Infrastructure.Repository
 
     public async Task<Report> GetReportByIdAsync(string id)
     {
-      return await _reportCollection.Find(x => x.Id == id).FirstAsync();
+      return await _reportCollection.Find(x => x.Id == id).FirstOrDefaultAsync();
     }
 
     public async Task<IList<ReportDetail>> GetDetailsByReportIdAsync(string reportId)
