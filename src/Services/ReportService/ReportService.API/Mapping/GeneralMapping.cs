@@ -2,7 +2,7 @@
 using ReportService.API.Domain.Entities;
 using ReportService.API.Models;
 
-namespace ContactService.API.Mapping
+namespace ReportService.API.Mapping
 {
   public class GeneralMapping : Profile
   {

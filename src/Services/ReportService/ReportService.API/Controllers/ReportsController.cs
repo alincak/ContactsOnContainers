@@ -40,7 +40,7 @@ namespace ReportService.API.Controllers
     }
 
     [HttpPost]
-    [ProducesResponseType(typeof(ResultId<string>), (int)HttpStatusCode.Created)]
+    [ProducesResponseType(typeof(CustomResponse<ResultId<string>>), (int)HttpStatusCode.Created)]
     [ProducesResponseType((int)HttpStatusCode.BadRequest)]
     public async Task<IActionResult> CreateReportAsync()
     {

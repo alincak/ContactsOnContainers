@@ -42,6 +42,10 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{53CE8751
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ContactService.UnitTests", "Services\ContactService\tests\ContactService.UnitTests\ContactService.UnitTests.csproj", "{7B1D8E0C-2C77-40E0-9149-B5E33F34CB0C}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{92581888-826B-4F06-8457-85C030DB6759}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ReportService.UnitTests", "Services\ReportService\tests\ReportService.UnitTests\ReportService.UnitTests.csproj", "{AF184C16-E15C-44AC-B407-CFA9DED281EF}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -84,6 +88,10 @@ Global
 		{7B1D8E0C-2C77-40E0-9149-B5E33F34CB0C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7B1D8E0C-2C77-40E0-9149-B5E33F34CB0C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7B1D8E0C-2C77-40E0-9149-B5E33F34CB0C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AF184C16-E15C-44AC-B407-CFA9DED281EF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AF184C16-E15C-44AC-B407-CFA9DED281EF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AF184C16-E15C-44AC-B407-CFA9DED281EF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AF184C16-E15C-44AC-B407-CFA9DED281EF}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -101,6 +109,8 @@ Global
 		{CB5FB0EF-EB4A-4966-BC9B-407EBA7308E2} = {EAC4C31C-DAD3-4BE5-A8BA-EA5495C5DBE5}
 		{53CE8751-9E3E-4308-BE2B-0D0FE46A82D4} = {D3A01A3A-4681-4A0A-9273-646E431F500D}
 		{7B1D8E0C-2C77-40E0-9149-B5E33F34CB0C} = {53CE8751-9E3E-4308-BE2B-0D0FE46A82D4}
+		{92581888-826B-4F06-8457-85C030DB6759} = {A2147618-5167-4EE1-B5F6-F142D57927EC}
+		{AF184C16-E15C-44AC-B407-CFA9DED281EF} = {92581888-826B-4F06-8457-85C030DB6759}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {11A5CB13-DBE8-495D-98EA-919FE4851AC8}
