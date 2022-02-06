@@ -74,7 +74,7 @@ namespace ContactService.API.Controllers
     }
 
     [HttpPost]
-    [ProducesResponseType(typeof(ResultId<string>), (int)HttpStatusCode.Created)]
+    [ProducesResponseType(typeof(CustomResponse<ResultId<string>>), (int)HttpStatusCode.Created)]
     [ProducesResponseType((int)HttpStatusCode.BadRequest)]
     public async Task<IActionResult> CreateContactAsync([FromBody] ContactEditVo model)
     {
@@ -89,7 +89,7 @@ namespace ContactService.API.Controllers
     }
 
     [HttpPost("info")]
-    [ProducesResponseType(typeof(ResultId<string>), (int)HttpStatusCode.Created)]
+    [ProducesResponseType(typeof(CustomResponse<ResultId<string>>), (int)HttpStatusCode.Created)]
     [ProducesResponseType((int)HttpStatusCode.BadRequest)]
     public async Task<IActionResult> CreateContactInfoAsync([FromBody] ContactInfoVo model)
     {

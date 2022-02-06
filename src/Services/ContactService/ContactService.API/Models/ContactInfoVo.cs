@@ -15,12 +15,12 @@ namespace ContactService.API.Models
 
       if (string.IsNullOrEmpty(Value))
       {
-        yield return new ValidationResult("Cannot be empty", new[] { "Value" });
+        yield return new ValidationResult("Cannot be empty", new[] { nameof(Value) });
       }
 
       if (string.IsNullOrEmpty(ContactId))
       {
-        yield return new ValidationResult("Cannot be empty", new[] { "ContactId" });
+        yield return new ValidationResult("Cannot be empty", new[] { nameof(ContactId) });
       }
     }
 

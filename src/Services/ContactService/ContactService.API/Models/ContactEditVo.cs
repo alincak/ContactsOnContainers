@@ -15,7 +15,7 @@ namespace ContactService.API.Models
 
       if (string.IsNullOrEmpty(Name))
       {
-        yield return new ValidationResult("Cannot be empty", new[] { "Name" });
+        yield return new ValidationResult("Cannot be empty", new[] { nameof(Name) });
       }
     }
 
